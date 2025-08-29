@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import Navigation from "./components/Navigation";
+import { useNotification } from "./hooks/useNotification";
+import Notification from "./components/Notification";
 
 // Иконки для преимуществ
 const CheckIcon = () => (
@@ -47,14 +49,62 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    comment: ""
+    comment: "",
   });
+  
+  const { 
+    notification, 
+    isVisible, 
+    showSuccess, 
+    showError, 
+    showLoading, 
+    hideLoading,
+    hideNotification 
+  } = useNotification();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Форма отправлена:", formData);
-    alert("Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.");
-    setFormData({ name: "", phone: "", comment: "" });
+    
+    // Показываем уведомление о загрузке
+    showLoading("Отправка заявки", "Пожалуйста, подождите...");
+    
+    try {
+      const response = await fetch('/api/applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Скрываем загрузку и показываем успех
+        hideLoading();
+        showSuccess(
+          "Заявка отправлена!", 
+          "Спасибо! Мы свяжемся с вами в ближайшее время.",
+          6000
+        );
+        
+        // Очищаем форму
+        setFormData({ name: "", phone: "", comment: "" });
+      } else {
+        const errorData = await response.json();
+        hideLoading();
+        showError(
+          "Ошибка отправки", 
+          errorData.error || 'Не удалось отправить заявку. Попробуйте еще раз.',
+          8000
+        );
+      }
+    } catch (error) {
+      hideLoading();
+      showError(
+        "Ошибка сети", 
+        "Произошла ошибка при отправке заявки. Проверьте подключение к интернету.",
+        8000
+      );
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -66,6 +116,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Уведомления */}
+      {notification && (
+        <Notification
+          type={notification.type}
+          title={notification.title}
+          message={notification.message}
+          isVisible={isVisible}
+          onClose={hideNotification}
+          duration={notification.duration}
+        />
+      )}
       <Navigation />
       
       {/* Hero Section */}
