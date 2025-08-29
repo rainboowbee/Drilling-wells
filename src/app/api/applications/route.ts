@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "../../../../lib/prisma"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../auth/[...nextauth]/route"
+import { authOptions } from "@/lib/auth"
 
 // POST - создание новой заявки
 export async function POST(request: NextRequest) {
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     )
-  } catch (error) {
+  } catch (error) { // eslint-disable-line @typescript-eslint/no-unused-vars
     console.error('Ошибка при создании заявки:', error)
     return NextResponse.json(
       { error: 'Внутренняя ошибка сервера' },
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET - получение всех заявок (только для админов)
-export async function GET(_: NextRequest) {
+export async function GET(_unused: NextRequest) { // eslint-disable-line @typescript-eslint/no-unused-vars
   try {
     // Проверка авторизации
     const session = await getServerSession(authOptions)

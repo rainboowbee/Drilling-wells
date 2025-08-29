@@ -71,7 +71,7 @@ export default function AdminPage() {
       } else {
         setError('Ошибка при загрузке заявок');
       }
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       setError('Ошибка сети');
     } finally {
       setLoading(false);
@@ -106,7 +106,7 @@ export default function AdminPage() {
         hideLoading();
         showError("Ошибка обновления", "Не удалось обновить статус заявки");
       }
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при обновлении статуса");
     }
@@ -130,7 +130,7 @@ export default function AdminPage() {
         hideLoading();
         showError("Ошибка удаления", "Не удалось удалить заявку");
       }
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при удалении заявки");
     }
@@ -140,7 +140,7 @@ export default function AdminPage() {
     try {
       await navigator.clipboard.writeText(text);
       showSuccess("Номер скопирован", "Номер телефона скопирован в буфер обмена", 3000);
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       showError("Ошибка копирования", "Не удалось скопировать номер телефона");
     }
   };

@@ -71,7 +71,7 @@ export default function SetupPage() {
         hideLoading();
         showError("Ошибка создания", data.error || 'Не удалось создать администратора', 5000);
       }
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при создании администратора", 5000);
     } finally {

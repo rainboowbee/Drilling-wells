@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import { signIn, getSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useNotification } from '../../hooks/useNotification';
 import Notification from '../../components/Notification';
 
@@ -41,22 +42,15 @@ export default function SignIn() {
         hideLoading();
         showError("Ошибка входа", "Неверный email или пароль", 5000);
       } else {
-        // Проверяем роль пользователя
-        const session = await getSession();
-        if (session?.user?.role === 'ADMIN') {
-          hideLoading();
-          showSuccess("Успешный вход", "Добро пожаловать в админ-панель!", 2000);
-          
-          // Небольшая задержка для показа уведомления
-          setTimeout(() => {
-            router.push('/admin');
-          }, 1500);
-        } else {
-          hideLoading();
-          showError("Доступ запрещен", "У вас нет доступа к админ-панели", 5000);
-        }
+        hideLoading();
+        showSuccess("Успешный вход", "Добро пожаловать в админ-панель!", 2000);
+        
+        // Небольшая задержка для показа уведомления
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1500);
       }
-    } catch (_) {
+    } catch (_unused) { // eslint-disable-line @typescript-eslint/no-unused-vars
       hideLoading();
       showError("Ошибка системы", "Произошла ошибка при входе", 5000);
     } finally {
@@ -184,12 +178,12 @@ export default function SignIn() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
-          <a
+          <Link
             href="/"
             className="text-blue-600 hover:text-blue-700 text-sm font-medium"
           >
             ← Вернуться на главную
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
     </div>
