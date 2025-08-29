@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET - получение всех заявок (только для админов)
-export async function GET(_unused: NextRequest) { // eslint-disable-line @typescript-eslint/no-unused-vars
+export async function GET(_unused: NextRequest) {
   try {
     // Проверка авторизации
     const session = await getServerSession(authOptions)

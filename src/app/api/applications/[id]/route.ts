@@ -49,6 +49,12 @@ export async function PATCH(
           { status: 404 }
         )
       }
+      if (error.message.includes('P2002')) {
+        return NextResponse.json(
+          { error: 'Конфликт данных' },
+          { status: 409 }
+        )
+      }
     }
     
     return NextResponse.json(
