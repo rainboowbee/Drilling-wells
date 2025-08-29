@@ -186,15 +186,27 @@ export default function Home() {
               className="order-1 lg:order-2"
             >
               <div className="relative">
-                <div className="bg-gradient-to-br from-blue-100 via-cyan-200 to-blue-300 rounded-3xl p-8 sm:p-12 h-64 sm:h-80 lg:h-96 flex items-center justify-center shadow-2xl">
-                  <div className="text-center">
-                    <WaterIcon />
-                    <p className="text-blue-800 font-semibold mt-4 text-sm sm:text-base">Водоносный слой</p>
+                    <Image
+                      src="/diploma.png"
+                      alt="Диплом, подтверждающий квалификацию"
+                      width={300}
+                      height={200}
+                      className="w-full h-full object-contain rounded-2xl shadow-lg"
+                      priority
+                    />
+                
+                
+                {/* Информация о районе работы */}
+                <div className="mt-4 bg-gradient-to-r from-blue-100 to-cyan-200 rounded-2xl p-4 text-center">
+                  <div className="flex items-center justify-center space-x-2 mb-2">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="text-blue-800 font-semibold">Работаем в Переславском районе</span>
                   </div>
+                  <p className="text-sm text-blue-700">Бурение скважин в Переславле-Залесском и окрестностях</p>
                 </div>
-                {/* Декоративные элементы */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-pulse"></div>
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-400 rounded-full animate-pulse animation-delay-1000"></div>
               </div>
             </motion.div>
           </div>
@@ -374,7 +386,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16 leading-tight"
           >
-            Оставьте заявку на бурение
+            О нас и наши преимущества
           </motion.h2>
           
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -452,20 +464,6 @@ export default function Home() {
               className="space-y-8"
             >
               <div className="bg-gradient-to-br from-blue-100 to-cyan-200 rounded-3xl p-8 text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Свяжитесь с нами</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-center space-x-3">
-                    <PhoneIcon />
-                    <span className="text-gray-700 font-medium">+7 (XXX) XXX-XX-XX</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-3">
-                    <MapIcon />
-                    <span className="text-gray-700 font-medium">Работаем по всей области</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-green-100 to-emerald-200 rounded-3xl p-8 text-center">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Почему выбирают нас</h3>
                 <div className="space-y-3 text-sm text-gray-700">
                   <p>✓ Опыт более 10 лет</p>
