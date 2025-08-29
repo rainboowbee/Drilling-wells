@@ -56,7 +56,7 @@ export default function SignIn() {
           showError("Доступ запрещен", "У вас нет доступа к админ-панели", 5000);
         }
       }
-    } catch (_error) {
+    } catch (_) {
       hideLoading();
       showError("Ошибка системы", "Произошла ошибка при входе", 5000);
     } finally {

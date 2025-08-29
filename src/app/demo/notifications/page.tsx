@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useNotification } from '../../hooks/useNotification';
 import Notification from '../../components/Notification';
+import Link from 'next/link';
 
 export default function NotificationsDemo() {
   const { 
@@ -143,12 +144,12 @@ export default function NotificationsDemo() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 text-center"
         >
-          <a
+          <Link
             href="/"
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
           >
             ← Вернуться на главную
-          </a>
+          </Link>
         </motion.div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useNotification } from '../hooks/useNotification';
 import Notification from '../components/Notification';
 
@@ -14,7 +14,6 @@ export default function SetupPage() {
     confirmPassword: ''
   });
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   
   const { 
     notification, 
@@ -72,7 +71,7 @@ export default function SetupPage() {
         hideLoading();
         showError("Ошибка создания", data.error || 'Не удалось создать администратора', 5000);
       }
-    } catch (error) {
+    } catch (_) {
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при создании администратора", 5000);
     } finally {
@@ -239,19 +238,19 @@ export default function SetupPage() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center space-y-4"
         >
-          <a
+          <Link
             href="/auth/signin"
             className="block text-green-600 hover:text-green-700 text-sm font-medium"
           >
             → Перейти на страницу входа
-          </a>
+          </Link>
           
-          <a
+          <Link
             href="/"
             className="block text-blue-600 hover:text-blue-700 text-sm font-medium"
           >
             ← Вернуться на главную
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
     </div>
