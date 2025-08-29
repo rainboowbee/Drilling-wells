@@ -71,7 +71,7 @@ export default function AdminPage() {
       } else {
         setError('Ошибка при загрузке заявок');
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Ошибка сети');
     } finally {
       setLoading(false);
@@ -106,7 +106,7 @@ export default function AdminPage() {
         hideLoading();
         showError("Ошибка обновления", "Не удалось обновить статус заявки");
       }
-    } catch (err) {
+    } catch (_err) {
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при обновлении статуса");
     }
@@ -130,7 +130,7 @@ export default function AdminPage() {
         hideLoading();
         showError("Ошибка удаления", "Не удалось удалить заявку");
       }
-    } catch (err) {
+    } catch (_err) {
       hideLoading();
       showError("Ошибка сети", "Произошла ошибка при удалении заявки");
     }
@@ -140,7 +140,7 @@ export default function AdminPage() {
     try {
       await navigator.clipboard.writeText(text);
       showSuccess("Номер скопирован", "Номер телефона скопирован в буфер обмена", 3000);
-    } catch (err) {
+    } catch (_err) {
       showError("Ошибка копирования", "Не удалось скопировать номер телефона");
     }
   };

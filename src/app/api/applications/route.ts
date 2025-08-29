@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET - получение всех заявок (только для админов)
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Проверка авторизации
     const session = await getServerSession(authOptions)
