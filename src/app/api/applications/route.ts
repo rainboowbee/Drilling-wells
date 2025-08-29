@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     )
-  } catch (error) { // eslint-disable-line @typescript-eslint/no-unused-vars
+  } catch (error) {
     console.error('Ошибка при создании заявки:', error)
     return NextResponse.json(
       { error: 'Внутренняя ошибка сервера' },

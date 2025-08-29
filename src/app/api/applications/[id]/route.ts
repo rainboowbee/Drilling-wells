@@ -8,6 +8,14 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params
+    
+    if (!id || typeof id !== 'string') {
+      return NextResponse.json(
+        { error: 'Неверный ID заявки' },
+        { status: 400 }
+      )
+    }
+
     const body = await request.json()
     const { status } = body
 
@@ -32,6 +40,17 @@ export async function PATCH(
     })
   } catch (error) {
     console.error('Ошибка при обновлении заявки:', error)
+    
+    // Обработка специфических ошибок Prisma
+    if (error instanceof Error) {
+      if (error.message.includes('P2025')) {
+        return NextResponse.json(
+          { error: 'Заявка не найдена' },
+          { status: 404 }
+        )
+      }
+    }
+    
     return NextResponse.json(
       { error: 'Внутренняя ошибка сервера' },
       { status: 500 }
@@ -47,6 +66,13 @@ export async function DELETE(
   try {
     const { id } = await params
 
+    if (!id || typeof id !== 'string') {
+      return NextResponse.json(
+        { error: 'Неверный ID заявки' },
+        { status: 400 }
+      )
+    }
+
     await prisma.application.delete({
       where: { id },
     })
@@ -56,6 +82,17 @@ export async function DELETE(
     })
   } catch (error) {
     console.error('Ошибка при удалении заявки:', error)
+    
+    // Обработка специфических ошибок Prisma
+    if (error instanceof Error) {
+      if (error.message.includes('P2025')) {
+        return NextResponse.json(
+          { error: 'Заявка не найдена' },
+          { status: 404 }
+        )
+      }
+    }
+    
     return NextResponse.json(
       { error: 'Внутренняя ошибка сервера' },
       { status: 500 }
